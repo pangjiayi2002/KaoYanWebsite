@@ -33,10 +33,8 @@
         <option value="2023">2023</option>
         <option value="2024">2024</option>
     </select>
-
-    <!-- 提交按钮 -->
-    <button type="submit">提交</button>
-    <h1>分数线</h1>
+    <h2>分数线</h2>
+    这是一个测试
 </form>
 </body>
 </html>
