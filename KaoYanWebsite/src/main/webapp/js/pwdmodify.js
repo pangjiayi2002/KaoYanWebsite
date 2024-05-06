@@ -16,8 +16,9 @@ $(function(){
     oldpassword.on("blur",function(){
         $.ajax({
             type:"POST",
-            url:path+"/smbms/UserServlet",
-            data:{method:"pwdmodify",oldpassword:oldpassword.val()},
+            // url:${pageContext.request.contextPath}+"/PwdChangeServlet",
+            url:path+"/PwdChangeServlet",
+            data:{method:"pwdmodify",oldpassword:oldpassword.val()},//ajax传递参数
             dataType:"json",
             success:function(data){
                 if(data.result == "true"){//旧密码正确

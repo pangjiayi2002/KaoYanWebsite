@@ -34,7 +34,7 @@ li{
     font-size: 22px;
     padding-left:80px;
     text-shadow: 2px 1px #000;
-    background: url("../images/buy.png") 30px center no-repeat;
+    background: url("../images/xiugai.png") 30px center no-repeat;
 
 }
 .publicHeaderR{
@@ -140,7 +140,7 @@ li{
     background: url("../images/zd.png") 0  center no-repeat;
 }
 .list li:nth-child(2){
-    background: url("../images/gys.png") 0  center no-repeat;
+    background: url("../images/clock.jpg") 0  center no-repeat;
 }
 .list li:nth-child(3){
     background: url("../images/yh.png") 0  center no-repeat;

@@ -118,3 +118,13 @@ div > .btn {
     text-decoration: none;
     cursor: pointer;
 }
+
+.button-container {
+    width: 50%;
+    margin-bottom: 10px; /* 可以根据需要调整按钮之间的间距 */
+}
+
+.btn {
+    width: 100%;
+    /* 其他按钮样式 */
+}

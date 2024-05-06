@@ -36,10 +36,10 @@ public class ChangeImageServlet extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        //获取更新后的图像
-        byte[] newAvatar = userService.getPersonalAvatar(1);
-        String base64Image = ImageUtil.byteToBase64(newAvatar);
-        request.setAttribute("base64Image", base64Image);
-        request.getRequestDispatcher("test.jsp").forward(request,response);
+//        //获取更新后的图像
+//        byte[] newAvatar = userService.getPersonalAvatar(1);
+//        String base64Image = ImageUtil.byteToBase64(newAvatar);
+//        request.setAttribute("base64Image", base64Image);
+        request.getRequestDispatcher("PersonalCenter.jsp").forward(request,response);
     }
 }

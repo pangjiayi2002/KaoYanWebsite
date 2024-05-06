@@ -1,28 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>考研小站</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/public.css"/>
-    <style>
-        .right {
-            float: right;
-            width: 70%; /* 调整右侧部分的宽度 */
-        }
-    </style>
-</head>
-<body>
-<!-- 头部 -->
-<header class="publicHeader">
-    <h1>修改个人信息</h1>
-    <div class="publicHeaderR">
-        <p><span>下午好！</span><span style="color: #fff21b">${userSession.userName}</span> , 欢迎你！</p>
-        <a href="${pageContext.request.contextPath}/LogoutServlet">退出</a>
-    </div>
-</header>
+<%@ include file="head.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/pwdmodify.js"></script>
 <!-- 主体内容 -->
 <section class="publicMian">
     <div class="left">
@@ -42,7 +22,7 @@
             <span>密码修改页面</span>
         </div>
         <div class="providerAdd">
-            <form action="/smbms/UserServlet" method="post" id="userForm" name="userForm">
+            <form action="${pageContext.request.contextPath}/PwdChangeServlet" method="post" id="userForm" name="userForm">
                 <input type="hidden" name="method" value="savepwd">
                 <!--div的class 为error是验证错误，ok是验证成功-->
                 <div class="info">${message}</div>
@@ -67,7 +47,6 @@
             </form>
         </div>
     </div>
+    <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
+    <input type="hidden" id="referer" name="referer" value="<%=request.getHeader("Referer")%>"/>
 </section>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/pwdmodify.js"></script>
-</body>
-</html>
