@@ -12,11 +12,11 @@
 <%
     UserService userService=new UserServiceImpl();
 //    Object o = request.getSession().getAttribute(Constants.USER_SESSION);
-    HttpSession session1=request.getSession();
-    String username= session1.getAttribute("username").toString();
-    String RestaurantName= userService.getRestaurantName(username);
-    session1.setAttribute("RestaurantName",RestaurantName);
-    List<RestaurantInfo> infos = resAdminSer.getRestaurant(RestaurantName);
+//    HttpSession session1=request.getSession();
+//    String username= session1.getAttribute("username").toString();
+//    String RestaurantName= userService.getRestaurantName(username);
+//    session1.setAttribute("RestaurantName",RestaurantName);
+//    List<RestaurantInfo> infos = resAdminSer.getRestaurant(RestaurantName);
 %>
 <section class="publicMian">
     <div class="left">
