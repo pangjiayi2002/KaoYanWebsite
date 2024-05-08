@@ -1,6 +1,7 @@
 package service.user;
 
 import pojo.School;
+import pojo.Score;
 import pojo.User;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface UserService {
     public boolean updateUsername(int id,String username);
     //得到学校信息
     List<School> getSchool()throws Exception;
+    //根据条件查询院校分数线
+    public List<Score> getScoreList(String schoolName, int year);
 
 }

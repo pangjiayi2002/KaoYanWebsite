@@ -59,10 +59,21 @@ body {
     border: 2px solid #007bff;
     margin-bottom: 10px;
 }
-
-.button-login {
+.to1 {
+    position: relative;
     text-align: center;
 }
+
+.button-login {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+/*.button-login {*/
+/*    text-align: center;*/
+/*}*/
 
 /* Additional styles */
 .to3, .to2, .to1 {

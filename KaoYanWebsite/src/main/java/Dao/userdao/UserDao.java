@@ -1,6 +1,7 @@
 package Dao.userdao;
 
 import pojo.School;
+import pojo.Score;
 import pojo.User;
 
 import java.sql.Connection;
@@ -22,6 +23,9 @@ public interface UserDao {
     public int updateUsername(Connection connection,int id,String username) throws SQLException;
     //获取学校信息
     List<School> getSchool(Connection connection)throws Exception;
+    //得到学校分数
+    List<Score> getScoreList(Connection connection, String schoolName, int year) throws SQLException;
+
 //    //获取评论信息
 //    Evaluate getEvaluateById(Connection connection, String id) throws Exception;
 //    //获取该用户收到的所有评论

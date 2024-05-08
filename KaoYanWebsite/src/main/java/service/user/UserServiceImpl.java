@@ -4,6 +4,7 @@ import Dao.BaseDao;
 import Dao.userdao.UserDao;
 import Dao.userdao.UserDaoImpl;
 import pojo.School;
+import pojo.Score;
 import pojo.User;
 
 import java.sql.Connection;
@@ -128,5 +129,22 @@ public class UserServiceImpl implements UserService{
         }
         System.out.println(schoolList.toArray());
         return schoolList;
+    }
+
+    @Override
+    public List<Score> getScoreList(String schoolName, int year) {
+        Connection connection=null;
+        List<Score> scoreList=null;
+//        System.out.println("schoolName-->"+schoolName);
+//        System.out.println("year-->"+year);
+        try {
+            connection=BaseDao.getConnection();
+            scoreList=userDao.getScoreList(connection,schoolName,year);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return scoreList;
     }
 }

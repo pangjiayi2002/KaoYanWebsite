@@ -58,15 +58,15 @@
             </form>
         </div>
     </div>
-    <%
-        restaurantAdminService resAdminSer=new restaurantAdminServiceImpl();
-        String restaurantName= (String) session.getAttribute("restaurantName");
-        int count=resAdminSer.notRead(restaurantName);
-    %>
+<%--    <%--%>
+<%--        restaurantAdminService resAdminSer=new restaurantAdminServiceImpl();--%>
+<%--        String restaurantName= (String) session.getAttribute("restaurantName");--%>
+<%--        int count=resAdminSer.notRead(restaurantName);--%>
+<%--    %>--%>
     <div class="container">
         <div class="button-container">
             <button type="button" class="btn" onclick="location.href=''">我的信息</button>
-            <span style="position: absolute; color: red;"><%=count%></span>
+<%--            <span style="position: absolute; color: red;"><%=count%></span>--%>
         </div>
     </div>
     <div class="container">

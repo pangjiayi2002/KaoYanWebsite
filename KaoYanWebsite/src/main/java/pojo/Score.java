@@ -4,7 +4,7 @@ public class Score {
     private int school_id;
     private int score_year;
     private String Master_Type;
-    private String Master_Code;
+    private String Major_Code;
     private String Major_Name;
     private int Total_Score;
     private String Politics;
@@ -15,11 +15,11 @@ public class Score {
     public Score() {
     }
 
-    public Score(int school_id, int score_year, String master_Type, String master_Code, String major_Name, int total_Score, String politics, String english, String major_Course_One, String major_Course_Two) {
+    public Score(int school_id, int score_year, String master_Type, String major_Code, String major_Name, int total_Score, String politics, String english, String major_Course_One, String major_Course_Two) {
         this.school_id = school_id;
         this.score_year = score_year;
         Master_Type = master_Type;
-        Master_Code = master_Code;
+        Major_Code = major_Code;
         Major_Name = major_Name;
         Total_Score = total_Score;
         Politics = politics;
@@ -52,12 +52,12 @@ public class Score {
         Master_Type = master_Type;
     }
 
-    public String getMaster_Code() {
-        return Master_Code;
+    public String getMajor_Code() {
+        return Major_Code;
     }
 
-    public void setMaster_Code(String master_Code) {
-        Master_Code = master_Code;
+    public void setMajor_Code(String major_Code) {
+        Major_Code = major_Code;
     }
 
     public String getMajor_Name() {
@@ -106,5 +106,21 @@ public class Score {
 
     public void setMajor_Course_Two(String major_Course_Two) {
         Major_Course_Two = major_Course_Two;
+    }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "school_id=" + school_id +
+                ", score_year=" + score_year +
+                ", Master_Type='" + Master_Type + '\'' +
+                ", Major_Code='" + Major_Code + '\'' +
+                ", Major_Name='" + Major_Name + '\'' +
+                ", Total_Score=" + Total_Score +
+                ", Politics='" + Politics + '\'' +
+                ", English='" + English + '\'' +
+                ", Major_Course_One='" + Major_Course_One + '\'' +
+                ", Major_Course_Two='" + Major_Course_Two + '\'' +
+                '}';
     }
 }

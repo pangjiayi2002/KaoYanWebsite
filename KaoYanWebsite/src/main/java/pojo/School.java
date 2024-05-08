@@ -57,4 +57,15 @@ public class School {
     public void setSchool_pro(String school_pro) {
         this.school_pro = school_pro;
     }
+
+    @Override
+    public String toString() {
+        return "School{" +
+                "school_id=" + school_id +
+                ", school_name='" + school_name + '\'' +
+                ", school_img='" + school_img + '\'' +
+                ", school_title='" + school_title + '\'' +
+                ", school_pro='" + school_pro + '\'' +
+                '}';
+    }
 }

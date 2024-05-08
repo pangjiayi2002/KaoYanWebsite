@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import pojo.School;
+import pojo.Score;
 import pojo.User;
 import service.user.UserService;
 import service.user.UserServiceImpl;
@@ -14,12 +16,14 @@ import util.Constants;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @MultipartConfig
-@WebServlet(name = "PwdChangeServlet", value = "/PwdChangeServlet")
-public class PwdChangeServlet extends HttpServlet {
+@WebServlet(name = "UserServlet", value = "/UserServlet")
+public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -32,6 +36,12 @@ public class PwdChangeServlet extends HttpServlet {
             this.updatePwd(request,response);
         }else if (method.equals("pwdmodify")&&method!=null){
             this.pwdModify(request,response);
+        }else if (method.equals("query")&&method!=null) {
+            try {
+                this.query(request,response);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -81,5 +91,28 @@ public class PwdChangeServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void query(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String schoolname = request.getParameter("schoolName");
+        String year = request.getParameter("year");
+        int queryYear=0;
+        //获取用户列表
+        UserServiceImpl userService = new UserServiceImpl();
+        List<Score> scoreList=null;
+        if (schoolname==null){
+            schoolname="";
+        }
+        if (year!=null && !year.isEmpty()){
+            queryYear=Integer.parseInt(year);
+        }
+        scoreList = userService.getScoreList(schoolname, queryYear);
+        request.setAttribute("scoreList",scoreList);
+        // 获取学校列表
+        List<School> schoolList = userService.getSchool();
+        request.setAttribute("schoolList",schoolList);
+        request.setAttribute("schoolName",schoolname);
+        //返回前端
+        request.getRequestDispatcher("/result.jsp").forward(request,response);
     }
 }

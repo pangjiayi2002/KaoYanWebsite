@@ -22,7 +22,7 @@
             <span>密码修改页面</span>
         </div>
         <div class="providerAdd">
-            <form action="${pageContext.request.contextPath}/PwdChangeServlet" method="post" id="userForm" name="userForm">
+            <form action="${pageContext.request.contextPath}/UserServlet" method="post" id="userForm" name="userForm">
                 <input type="hidden" name="method" value="savepwd">
                 <!--div的class 为error是验证错误，ok是验证成功-->
                 <div class="info">${message}</div>
@@ -47,6 +47,6 @@
             </form>
         </div>
     </div>
-    <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
+    <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath}"/>
     <input type="hidden" id="referer" name="referer" value="<%=request.getHeader("Referer")%>"/>
 </section>

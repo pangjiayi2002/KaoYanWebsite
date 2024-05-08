@@ -2,6 +2,7 @@ package Dao.userdao;
 
 import Dao.BaseDao;
 import pojo.School;
+import pojo.Score;
 import pojo.User;
 
 import java.sql.Connection;
@@ -140,5 +141,49 @@ public class UserDaoImpl implements UserDao{
         }
         return List;
     }
+
+    @Override
+    public List<Score> getScoreList(Connection connection, String schoolName, int year) throws SQLException {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<Score> scoreList = new ArrayList<>();
+        if (connection != null) {
+            StringBuffer sql = new StringBuffer();
+            sql.append("SELECT f.* FROM school s,score f WHERE s.school_id = f.school_id");
+            ArrayList<Object> list = new ArrayList<>();
+            if (schoolName != null) {
+                sql.append(" and s.school_name = ?");
+                list.add(schoolName);
+            }
+            if (year > 0) {
+                sql.append(" and f.score_year= ?");
+                list.add(year);
+            }
+            Object[] params = list.toArray();
+            System.out.println("sql-->" + sql.toString());
+            pstm = connection.prepareStatement(sql.toString());
+            for (int i = 0; i < params.length; i++) {
+                pstm.setObject(i + 1, params[i]);
+            }
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Score score=new Score();
+                score.setSchool_id(rs.getInt("school_id"));
+                score.setScore_year(rs.getInt("score_year"));
+                score.setMaster_Type(rs.getString("Master_Type"));
+                score.setMajor_Code(rs.getString("Major_Code"));
+                score.setMajor_Name(rs.getString("Major_Name"));
+                score.setTotal_Score(rs.getInt("Total_Score"));
+                score.setPolitics(rs.getString("Politics"));
+                score.setEnglish(rs.getString("English"));
+                score.setMajor_Course_One(rs.getString("Major_Course_One"));
+                score.setMajor_Course_Two(rs.getString("Major_Course_Two"));
+                scoreList.add(score);
+            }
+        }
+        BaseDao.closeResource(null, pstm, rs);
+        return scoreList;
+    }
+
 
 }

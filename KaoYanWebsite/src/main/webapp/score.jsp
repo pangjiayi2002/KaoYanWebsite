@@ -16,25 +16,32 @@
     // 获取学校列表
     List<School> schools = userService.getSchool();
 %>
-<form action="" method="post">
-    <!-- 学校选择 -->
-    <label for="school">学校:</label>
-    <select name="school" id="school">
-        <!-- 循环输出学校选项 -->
-        <c:forEach var="school" items="<%=schools%>">
-            <option value="${school.school_id}">${school.getSchool_name()}</option>
+<div class="schoolList">
+    <ul>
+        <li>院校:</li>
+        <c:forEach var="school" items="${schoolList}">
+            <li></li>
         </c:forEach>
-    </select>
-    <!-- 年份选择 -->
-    <label for="year">年份:</label>
-    <select name="year" id="year">
-        <!-- 年份选项 -->
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-    </select>
-    <h2>分数线</h2>
-    这是一个测试
-</form>
+    </ul>
+    <ul>
+        <li>年份:</li>
+        <li value="2022">2022</li>
+        <li value="2023">2023</li>
+        <li value="2024">2024</li>
+    </ul>
+    <ul>
+        <li>
+            <span>类型</span>
+            <span>专业代码</span>
+            <span>专业名称</span>
+            <span>总分</span>
+            <span>政治</span>
+            <span>英语</span>
+            <span>专业课一</span>
+            <span>专业课二</span>
+        </li>
+
+    </ul>
+</div>
 </body>
 </html>
