@@ -3,6 +3,7 @@ package Dao;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 //操作数据库的公共类
@@ -79,7 +80,7 @@ public class BaseDao {
     public static int execute(Connection connection, PreparedStatement pstm, String sql, Object[] params) {
         int updateRows = 0;
         try {
-            pstm = connection.prepareStatement(sql);
+            pstm = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < params.length; i++) {
                 pstm.setObject(i + 1, params[i]);
             }
@@ -89,6 +90,24 @@ public class BaseDao {
         }
         return updateRows;
     }
+    public static ResultSet add(Connection connection,PreparedStatement pstm,String sql,Object[] params){
+        int updateRows=0;
+        ResultSet generateKeys=null;
+        try{
+            pstm=connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            for(int i=0;i< params.length;i++){
+                pstm.setObject(i+1,params[i]);
+            }
+            updateRows=pstm.executeUpdate();
+            if(updateRows>0){
+                generateKeys= pstm.getGeneratedKeys();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return generateKeys;
+    }
+
 
     /**
      * 释放资源

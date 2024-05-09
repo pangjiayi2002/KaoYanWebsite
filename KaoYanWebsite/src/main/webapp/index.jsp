@@ -8,5 +8,8 @@
 <h1><%= "Hello World!" %></h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
+<form action="postHomeServlet" method="post">
+  <input type="submit" value="社区">
+</form>
 </body>
 </html>

@@ -2,9 +2,9 @@ package servlet.user;
 
 import util.Constants;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet(name = "LogoutServlet", value = "/LogoutServlet")
