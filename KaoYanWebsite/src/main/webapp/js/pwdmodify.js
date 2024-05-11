@@ -16,8 +16,7 @@ $(function(){
     oldpassword.on("blur",function(){
         $.ajax({
             type:"POST",
-            // url:${pageContext.request.contextPath}+"/PwdChangeServlet",
-            url:path+"/PwdChangeServlet",
+            url: path + "/UserServlet",
             data:{method:"pwdmodify",oldpassword:oldpassword.val()},//ajax传递参数
             dataType:"json",
             success:function(data){
@@ -36,8 +35,6 @@ $(function(){
                 validateTip(oldpassword.next(),{"color":"red"},imgNo + " 请求错误",false);
             }
         });
-
-
     }).on("focus",function(){
         validateTip(oldpassword.next(),{"color":"#666666"},"* 请输入原密码",false);
     });
@@ -79,6 +76,5 @@ $(function(){
                 $("#userForm").submit();
             }
         }
-
     });
 });

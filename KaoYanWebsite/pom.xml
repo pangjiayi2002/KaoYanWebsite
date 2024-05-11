@@ -19,7 +19,6 @@
 
   <dependencies>
       <dependency>
-<<<<<<< Updated upstream
           <groupId>javax.servlet</groupId>
           <artifactId>javax.servlet-api</artifactId>
           <version>4.0.1</version>
@@ -36,32 +35,18 @@
       <version>5.0.0</version>
       <scope>provided</scope>
     </dependency>
-<dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-=======
-          <groupId>jakarta.servlet</groupId>
-          <artifactId>jakarta.servlet-api</artifactId>
-          <version>5.0.0</version>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter-api</artifactId>
-          <version>${junit.version}</version>
-          <scope>test</scope>
-      </dependency>
->>>>>>> Stashed changes
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
-<<<<<<< Updated upstream
       <!-- jstl-api -->
       <dependency>
           <groupId>jakarta.servlet.jsp</groupId>
@@ -76,23 +61,17 @@
           <scope>provided</scope>
       </dependency>
       <!-- jstl-api -->
-=======
->>>>>>> Stashed changes
       <dependency>
           <groupId>jakarta.servlet.jsp.jstl</groupId>
           <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
           <version>2.0.0</version>
       </dependency>
-<<<<<<< Updated upstream
       <!-- jstl -->
-=======
->>>>>>> Stashed changes
       <dependency>
           <groupId>org.glassfish.web</groupId>
           <artifactId>jakarta.servlet.jsp.jstl</artifactId>
           <version>2.0.0</version>
       </dependency>
-<<<<<<< Updated upstream
       <!--standard-impl-->
       <dependency>
           <groupId>org.apache.taglibs</groupId>
@@ -111,18 +90,13 @@
           <artifactId>fastjson</artifactId>
           <version>2.0.40</version>
       </dependency>
-=======
-
-
->>>>>>> Stashed changes
-  </dependencies>
-
-  <build>
-    <plugins>
-<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.2</version>
-      </plugin>    </plugins>
-  </build>
-</project>
+    </dependencies>
+  </project>
+<!--  <build>-->
+<!--    <plugins>-->
+<!--<plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-war-plugin</artifactId>-->
+<!--        <version>3.3.2</version>-->
+<!--      </plugin>    </plugins>-->
+<!--  </build>-->
