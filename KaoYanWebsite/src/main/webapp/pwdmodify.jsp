@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="head.jsp" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/pwdmodify.js"></script>
 <!-- 主体内容 -->
 <section class="publicMian">
     <div class="left">
@@ -50,3 +48,6 @@
     <input type="hidden" id="path" name="path" value="${pageContext.request.contextPath}"/>
     <input type="hidden" id="referer" name="referer" value="<%=request.getHeader("Referer")%>"/>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/pwdmodify.js"></script>
