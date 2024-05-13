@@ -11,7 +11,7 @@
 <head>
     <title>交流社区</title>
     <link type="text/css" rel="stylesheet" href="css/community.css"/>
-    <script type="text/javascript" src="JS/community.js"></script>
+    <script type="text/javascript" src="js/community.js"></script>
 </head>
 <body>
 <div class="container">
@@ -37,12 +37,39 @@
 
         </div>
         <table class="altrowstable" id="alternatecolor">
+            <%
+                int i=0;
+            %>
             <c:forEach var="post" items="${sessionScope.postList}">
                 <tr>
                     <td>
                         <div style="width: 100px;display: flex;flex-direction: column;">
-                            <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top">
-                            <h4>user1</h4>
+                            <%@page import="java.util.Base64" %>
+                            <%@ page import="pojo.Post" %>
+                            <%@ page import="java.util.ArrayList" %>
+                            <%@ page import="service.user.UserService" %>
+                            <%@ page import="util.ImageUtil" %>
+                            <%@ page import="service.user.UserServiceImpl" %>
+                            <%
+                                ArrayList<Post> postList= (ArrayList<Post>) session.getAttribute("postList");
+                                Post post=postList.get(i);
+                                byte[] avatar= post.getAvatar();
+                                String base64Image=ImageUtil.byteToBase64(avatar);
+                                i=i+1;
+                                boolean avatarIsNull=(avatar!=null);
+                            %>
+
+                            <c:choose>
+                                <c:when test="<%=avatarIsNull%>">
+                                    <img  class="to" alt="图片加载失败" src="data:image/jpeg;base64,<%=base64Image%>" height="40px" width="40px">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top" alt="加载图片失败">
+                                </c:otherwise>
+                            </c:choose>
+<%--                            <img  class="to" alt="图片加载失败" src="data:image/jpeg;base64,<%=base64Image%>" height="40px" width="40px">--%>
+
+                            <h4>${post.username}</h4>
                         </div>
                     </td>
                     <td>

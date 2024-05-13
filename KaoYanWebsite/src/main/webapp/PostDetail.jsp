@@ -20,7 +20,7 @@
         }
     </style>
     <link type="text/css" rel="stylesheet" href="css/community.css">
-    <script type="text/javascript" src="JS/community.js"></script>
+    <script type="text/javascript" src="js/community.js"></script>
     <script>
         // function toggleReplyForm(commentId){
         //     var replyForm=document.getElementById("replyForm_"+commentId);
@@ -104,7 +104,8 @@
                     <h4>@${sessionScope.postDetail.username}</h4>
                     <textarea name="commentContent" cols="60" rows="10" style="margin: 10px" placeholder="请输入评论内容"></textarea>
                     <div class="comment_buttons" style="display:flex;justify-content: center">
-                        <input type="button" class="comment_close_btn" style="width: 100px;height: 30px" value="关闭" onclick="closeDialog()"></input>
+<%--                        <input type="button" class="close_btn" style="width: 100px;height: 30px" value="关闭" onclick="closeDialog()">--%>
+                        <input type="button" class="close_btn" value="关闭"style="width: 100px;height: 30px;color: #0069d9" onclick="closeDialog()" >
                         <button type="submit" style="width: 100px;height: 30px">评论</button>
                     </div>
                 </form>

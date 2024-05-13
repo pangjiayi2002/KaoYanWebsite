@@ -2,6 +2,10 @@ package Dao.PostDao;
 
 import Dao.BaseDao;
 import pojo.Post;
+import Dao.userdao.UserDao;
+import Dao.userdao.UserDaoImpl;
+import pojo.Post;
+import jakarta.servlet.RequestDispatcher;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,14 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostDaoImpl implements PostDao{
+    UserDao userDao=new UserDaoImpl();
     @Override
     public int addPost(Connection connection, Post post) throws Exception {
         PreparedStatement pstm=null;
         int postId=-1;
         ResultSet generateKeys=null;
         if(null!=connection){
-            String sql="insert into kaoyanwebsite.post (title,content,username,schoolId) values(?,?,?,?)";
-            Object[] params={post.getTitle(),post.getContent(),post.getUsername(),post.getSchoolId()};
+            String sql="insert into kaoyanwebsite.post (title,content,username,schoolId,userId) values(?,?,?,?,?)";
+            Object[] params={post.getTitle(),post.getContent(),post.getUsername(),post.getSchoolId(),post.getUserId()};
             ResultSet rs= BaseDao.add(connection,pstm,sql,params);
             generateKeys=rs;
             if(generateKeys.next()){
@@ -56,12 +61,14 @@ public class PostDaoImpl implements PostDao{
         ResultSet rs=null;
         ArrayList<Post> postList=new ArrayList<>();
         int commentAmount=0;
+        byte[] avatar=null;
         if(null!=connection){
             List<Object> list=new ArrayList<>();
             String sql="select * from post where schoolId=?";
             Object[] params= {schoolId};
             rs=BaseDao.execute(connection,pstm,rs,sql,params);
             while(rs.next()){
+                //Post post=new Post();
                 Post post=new Post();
                 post.setId(rs.getInt("id"));
                 commentAmount=getPostCommentAmount(connection,pstm,rs.getInt("id"));
@@ -70,6 +77,10 @@ public class PostDaoImpl implements PostDao{
                 post.setContent(rs.getString("content"));
                 post.setUsername(rs.getString("username"));
                 post.setSchoolId(rs.getInt("schoolId"));
+                post.setUserId(rs.getInt("userId"));
+                //通过userId找到用户的头像
+                avatar=userDao.getAvatar(connection,rs.getInt("userId"));
+                post.setAvatar(avatar);
                 postList.add(post);
             }
             BaseDao.closeResource(null,pstm,rs);
