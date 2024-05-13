@@ -3,7 +3,7 @@ package service.post;
 import Dao.BaseDao;
 import Dao.PostDao.PostDao;
 import Dao.PostDao.PostDaoImpl;
-import Pojo.Post;
+import pojo.Post;
 
 import java.sql.Connection;
 import java.sql.SQLException;

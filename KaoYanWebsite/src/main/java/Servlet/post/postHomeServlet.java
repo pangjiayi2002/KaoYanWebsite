@@ -1,6 +1,6 @@
 package Servlet.post;
 
-import Pojo.Post;
+import pojo.Post;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

@@ -1,6 +1,6 @@
 package Servlet.post;
 
-import Pojo.Post;
+import pojo.Post;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -25,6 +25,7 @@ public class postServlet extends HttpServlet {
         //用户登录后，数据库返回一个User，保存在session中，通过getAttribute获取
         //再获取user的id!
         //
+        int userId=1;
         String username="张三";
         //将user对象保存在session中
 
@@ -39,6 +40,7 @@ public class postServlet extends HttpServlet {
         newpost.setTitle(title);
         newpost.setContent(content);
         newpost.setUsername(username);
+        newpost.setUserId(userId);
         newpost.setSchoolId(schoolId);
         flag=postService.addPost(newpost);
         int postId=flag;

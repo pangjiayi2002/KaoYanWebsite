@@ -184,6 +184,6 @@ public class UserDaoImpl implements UserDao{
         BaseDao.closeResource(null, pstm, rs);
         return scoreList;
     }
-
-
 }
+
+

@@ -3,7 +3,7 @@ package service.comment;
 import Dao.BaseDao;
 import Dao.CommentDao.CommentDao;
 import Dao.CommentDao.CommentDaoImpl;
-import Pojo.Comment;
+import pojo.Comment;
 
 import java.sql.Connection;
 import java.sql.SQLException;

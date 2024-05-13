@@ -1,4 +1,4 @@
-package Pojo;
+package pojo;
 
 import java.sql.Blob;
 import java.util.Date;
