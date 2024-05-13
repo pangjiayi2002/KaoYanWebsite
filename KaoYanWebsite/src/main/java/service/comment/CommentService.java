@@ -1,6 +1,6 @@
 package service.comment;
 
-import Pojo.Comment;
+import pojo.Comment;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

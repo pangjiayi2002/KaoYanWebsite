@@ -1,15 +1,15 @@
 package Dao.userdao;
 
 import Dao.BaseDao;
+import pojo.Comment;
 import pojo.School;
 import pojo.Score;
 import pojo.User;
+import util.Constants;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao{
@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao{
             Object[] params = {username,password};
             rs = BaseDao.execute(connection, pstm, rs, sql, params);
             if (rs.next()){
-                user = new User();
+                user=new User();
                 user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
@@ -183,6 +183,54 @@ public class UserDaoImpl implements UserDao{
         }
         BaseDao.closeResource(null, pstm, rs);
         return scoreList;
+    }
+
+    @Override
+    public List<Comment> getNotReadComment(Connection connection, String receiver) throws Exception {
+        PreparedStatement pstm=null;
+        ResultSet rs=null;
+        ArrayList<Comment> List=new ArrayList<>();
+        if(null!=connection){
+            String sql="select * from comment where receiver=? and isRead=0";
+            Object[] params = {receiver};
+            rs= BaseDao.execute(connection,pstm,rs,sql,params);
+            while(rs.next()){
+                int commentId=rs.getInt("commentId");
+                String sender=rs.getString("sender");
+                int postId=rs.getInt("postId");
+                String realReceiver=rs.getString("receiver");
+                String content=rs.getString("content");
+                int isRead=rs.getInt("isRead");
+                Date time=rs.getTime("time");
+                Blob avatar= rs.getBlob("avatar");
+                Comment comment=new Comment(commentId,sender,postId,realReceiver,content,isRead,time,avatar);
+                List.add(comment);
+            }
+            BaseDao.closeResource(null,pstm,rs);
+        }
+        return List;
+    }
+
+    @Override
+    public int notRead(Connection connection, String receiver) throws Exception {
+        PreparedStatement pstm=null;
+        ResultSet rs=null;
+        int count=0;
+        if(null!=connection){
+//            String sql="select isread from comment where id=? and sendertype='user'";
+            String sql="select isRead from comment where receiver=? and isRead=0";
+            Object[] params={receiver};
+            rs= BaseDao.execute(connection, pstm, rs, sql, params);
+            while(rs.next()){
+                count++;
+//                int isRead=rs.getInt("isRead");
+//                if (isRead==0){
+//                    count++;
+//                }
+            }
+            BaseDao.closeResource(null,pstm,rs);
+        }
+        return count;
     }
 
 

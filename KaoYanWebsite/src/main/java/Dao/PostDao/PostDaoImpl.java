@@ -1,8 +1,7 @@
 package Dao.PostDao;
 
 import Dao.BaseDao;
-import Pojo.Post;
-import jakarta.servlet.RequestDispatcher;
+import pojo.Post;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

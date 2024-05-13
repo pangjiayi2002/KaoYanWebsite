@@ -3,6 +3,7 @@ package service.user;
 import Dao.BaseDao;
 import Dao.userdao.UserDao;
 import Dao.userdao.UserDaoImpl;
+import pojo.Comment;
 import pojo.School;
 import pojo.Score;
 import pojo.User;
@@ -147,4 +148,35 @@ public class UserServiceImpl implements UserService{
         }
         return scoreList;
     }
+
+    @Override
+    public List<Comment> getNotReadComment(String receiver) {
+        Connection connection = null;
+        List<Comment> commentList = null;
+        try {
+            connection = BaseDao.getConnection();
+            commentList = userDao.getNotReadComment(connection,receiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, null, null);
+        }
+        return commentList;
+    }
+
+    @Override
+    public int notRead(String receiver) {
+        Connection connection = null;
+        int count=0;
+        try {
+            connection = BaseDao.getConnection();
+            count=userDao.notRead(connection,receiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
 }

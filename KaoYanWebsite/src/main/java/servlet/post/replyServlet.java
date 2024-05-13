@@ -1,6 +1,6 @@
-package Servlet.post;
+package servlet.post;
 
-import Pojo.Comment;
+import pojo.Comment;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

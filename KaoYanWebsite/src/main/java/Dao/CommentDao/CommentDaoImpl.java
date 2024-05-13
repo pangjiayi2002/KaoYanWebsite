@@ -1,7 +1,7 @@
 package Dao.CommentDao;
 
 import Dao.BaseDao;
-import Pojo.Comment;
+import pojo.Comment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

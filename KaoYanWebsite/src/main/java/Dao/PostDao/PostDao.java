@@ -1,6 +1,6 @@
 package Dao.PostDao;
 
-import Pojo.Post;
+import pojo.Post;
 
 import java.sql.Connection;
 import java.sql.SQLException;

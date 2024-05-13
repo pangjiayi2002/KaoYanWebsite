@@ -34,18 +34,28 @@
                         <option <c:if test="${school.school_name == schoolName }">selected="selected"</c:if>
                                 value="${school.school_name}">${school.school_name}</option>
                     </c:forEach>
-<%--                    <c:forEach var="school" items="${schoolList}">--%>
-<%--                        <option <c:if test="${school.school_name == schoolName }">selected="selected"</c:if>--%>
-<%--                                value="${school.school_id}">${school.school_name}</option>--%>
-<%--                    </c:forEach>--%>
                 </c:if>
             </select>
             <span>年份：</span>
             <select name="year">
-                <option value="2024" selected>2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
+                <c:forEach var="year" begin="2022" end="2024">
+                    <c:choose>
+                        <c:when test="${year eq param.year}">
+                            <option value="${year}" selected>${year}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${year}">${year}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
             </select>
+
+<%--            <span>年份：</span>--%>
+<%--            <select name="year">--%>
+<%--                <option value="2024" selected>2024</option>--%>
+<%--                <option value="2023">2023</option>--%>
+<%--                <option value="2022">2022</option>--%>
+<%--            </select>--%>
             <input	value="查 询" type="submit" id="searchbutton">
         </form>
     </div>

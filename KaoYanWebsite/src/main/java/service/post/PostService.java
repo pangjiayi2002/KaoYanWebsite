@@ -1,6 +1,6 @@
 package service.post;
 
-import Pojo.Post;
+import pojo.Post;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Dao.CommentDao;
 
-import Pojo.Comment;
+import pojo.Comment;
 
 import java.sql.Connection;
 import java.sql.SQLException;

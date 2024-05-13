@@ -1,9 +1,11 @@
 package service.user;
 
+import pojo.Comment;
 import pojo.School;
 import pojo.Score;
 import pojo.User;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface UserService {
@@ -11,7 +13,6 @@ public interface UserService {
     public User login(String userCode,String password);
     //获取用户信息
     public User get(String username);
-
     //更换头像
     public boolean change(byte[] avatar,int id);
     //获取图像
@@ -24,5 +25,10 @@ public interface UserService {
     List<School> getSchool()throws Exception;
     //根据条件查询院校分数线
     public List<Score> getScoreList(String schoolName, int year);
+    //获取该用户收到的未读评论
+    public List<Comment> getNotReadComment(String receiver);
+    //获取未读的信息个数
+    public int notRead(String receiver);
+
 
 }

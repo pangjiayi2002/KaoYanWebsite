@@ -26,8 +26,8 @@
                                 %>
                                 <img id="img" class="to" alt="图片加载失败" src="data:image/jpeg;base64,<%=base64Image%>">
                             </div>
-                            <div class="form-row button-login">
-                                <button type="button" class="btn" style="float: left" onclick="openModal()">更换头像</button>
+                            <div>
+                                <button type="button" class="btn"  onclick="openModal()">更换头像</button>
                                 <!-- 模态框 -->
                                 <div id="myModal" class="modal">
                                     <!-- 弹窗内容 -->
@@ -58,14 +58,16 @@
             </form>
         </div>
     </div>
-<%--    <%--%>
-<%--        restaurantAdminService resAdminSer=new restaurantAdminServiceImpl();--%>
-<%--        String restaurantName= (String) session.getAttribute("restaurantName");--%>
-<%--        int count=resAdminSer.notRead(restaurantName);--%>
-<%--    %>--%>
+    <%
+        String receiver=((User)o).getUsername();
+        int count=userService.notRead(receiver);
+    %>
     <div class="container">
         <div class="button-container">
-            <button type="button" class="btn" onclick="location.href=''">我的信息</button>
+            <button type="button" class="btn" onclick="location.href='infoList.jsp'" style="position: relative;">
+                我的信息 <span style="position: absolute; left: 100%; top: 0; color: red; "><%=count%></span>
+            </button>
+<%--            <button type="button" class="btn" onclick="location.href=''">我的信息</button>--%>
 <%--            <span style="position: absolute; color: red;"><%=count%></span>--%>
         </div>
     </div>
