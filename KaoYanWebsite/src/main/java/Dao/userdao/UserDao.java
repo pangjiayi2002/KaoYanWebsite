@@ -30,5 +30,7 @@ public interface UserDao {
     List<Comment> getNotReadComment(Connection connection, String receiver)throws Exception;
     //获取未读评论
     int notRead(Connection connection,String receiver)throws Exception;
+    //已读评论将isread从1修改为0
+    int modifyIsRead(Connection connection, int commentId) throws Exception;
 
 }

@@ -14,7 +14,6 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService{
     private UserDao userDao=new UserDaoImpl();
-
     @Override
     public User login(String userCode, String password) {
         Connection connection = null;
@@ -177,6 +176,22 @@ public class UserServiceImpl implements UserService{
             BaseDao.closeResource(connection, null, null);
         }
         return count;
+    }
+
+    @Override
+    public boolean modifyIsRead(int commentId) throws Exception {
+        Connection connection = null;
+        boolean flag = false;
+        try {
+            connection = BaseDao.getConnection();
+            if (userDao.modifyIsRead(connection, commentId) > 0)
+                flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, null, null);
+        }
+        return flag;
     }
 
 }

@@ -29,6 +29,7 @@ public interface UserService {
     public List<Comment> getNotReadComment(String receiver);
     //获取未读的信息个数
     public int notRead(String receiver);
-
+    //已读评论将isread从1修改为0
+    public boolean modifyIsRead(int commentId) throws Exception;
 
 }

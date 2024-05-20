@@ -13,7 +13,16 @@ public class Comment {
     private Date time;
     private Blob avatar;
 
-    public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead, Date time,Blob avatar) {
+    public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead) {
+        this.commentId = commentId;
+        this.sender = sender;
+        this.postId = postId;
+        this.receiver = receiver;
+        this.content = content;
+        this.isRead = isRead;
+    }
+
+    public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead, Date time, Blob avatar) {
         this.commentId = commentId;
         this.sender = sender;
         this.postId = postId;

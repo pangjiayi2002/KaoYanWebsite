@@ -5,7 +5,6 @@ import pojo.Comment;
 import pojo.School;
 import pojo.Score;
 import pojo.User;
-import util.Constants;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -201,9 +200,7 @@ public class UserDaoImpl implements UserDao{
                 String realReceiver=rs.getString("receiver");
                 String content=rs.getString("content");
                 int isRead=rs.getInt("isRead");
-                Date time=rs.getTime("time");
-                Blob avatar= rs.getBlob("avatar");
-                Comment comment=new Comment(commentId,sender,postId,realReceiver,content,isRead,time,avatar);
+                Comment comment=new Comment(commentId,sender,postId,realReceiver,content,isRead);
                 List.add(comment);
             }
             BaseDao.closeResource(null,pstm,rs);
@@ -233,6 +230,18 @@ public class UserDaoImpl implements UserDao{
         return count;
     }
 
+    @Override
+    public int modifyIsRead(Connection connection, int commentId) throws Exception {
+        int flag = 0;
+        PreparedStatement pstm = null;
+        if (null != connection) {
+            String sql = "update comment set isread=1 where commentId = ? ";
+            Object[] params = {commentId};
+            flag = BaseDao.execute(connection, pstm, sql, params);
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return flag;
+    }
 }
 
 

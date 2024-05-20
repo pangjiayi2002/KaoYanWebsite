@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>消息列表</title>
+    <link type="text/css" rel="stylesheet" href="css/community.css"/>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,15 +64,26 @@
 %>
 <section class="publicMain">
     <div class="left">
-        <h2 class="leftH2"><span class="span1"></span>消息列表 <span></span></h2>
-        <input type="button" class="back_btn" style="float: right" value="返回" onclick="">
+        <h2 class="leftH2">
+            <span class="span1"></span>消息列表
+            <span>
+                <input type="button" class="back_btn" style="float: right" value="返回" onclick="back()">
+            </span>
+        </h2>
     </div>
     <div class="container">
         <div class="button-container">
             <table class="table table-striped">
                 <c:forEach var="comment" items="<%=infos%>">
                     <tr>
-                        <td><span href="commentDetail.jsp?id=${comment.postId}>${comment.sender}回复了你：${comment.content}</span></td>
+                        <td>
+                            <form action="${pageContext.request.contextPath}/PostDetailServlet" method="post" style="display: flex; align-items: center;">
+                                <input type="hidden" name="id" value="${comment.postId}">
+                                <input type="hidden" name="commentId" value="${comment.commentId}">
+                                <span style="margin-right: 10px;" id="${comment.postId}">${comment.sender}回复了你：${comment.content}</span>
+                                <button type="submit" style="width: 100px; height: 30px;">查看</button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

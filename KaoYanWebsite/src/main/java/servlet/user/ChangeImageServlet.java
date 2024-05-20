@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import pojo.User;
 import service.user.UserService;
 import service.user.UserServiceImpl;
+import util.Constants;
 
 import java.io.*;
 @MultipartConfig
@@ -23,7 +25,10 @@ public class ChangeImageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        int id= Integer.parseInt(request.getParameter("id"));
-        int id=1;
+//        int id=1;
+        Object o = request.getSession().getAttribute(Constants.USER_SESSION);
+        int id=((User)o).getId();
+        System.out.println("id"+id);
         // 获取上传的文件
         Part filePart = request.getPart("imageFile");
         InputStream inputStream = filePart.getInputStream();

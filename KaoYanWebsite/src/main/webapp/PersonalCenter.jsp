@@ -21,7 +21,9 @@
                             <div class="to1">
                                 <%
                                     UserService userService=new UserServiceImpl();
-                                    byte[] avatar = userService.getPersonalAvatar(1);
+                                    Object o = request.getSession().getAttribute(Constants.USER_SESSION);
+                                    int id=((User)o).getId();
+                                    byte[] avatar = userService.getPersonalAvatar(id);
                                     String base64Image = ImageUtil.byteToBase64(avatar);
                                 %>
                                 <img id="img" class="to" alt="图片加载失败" src="data:image/jpeg;base64,<%=base64Image%>">
@@ -43,9 +45,6 @@
                     </div>
                     <div class="form">
                         <div class="form-row">
-                            <%
-                                Object o = request.getSession().getAttribute(Constants.USER_SESSION);
-                            %>
                             <label id="id" class="form-label">ID&nbsp;&nbsp;&nbsp;：</label><%=((User) o).getId()%>
                         </div>
                         <br>
