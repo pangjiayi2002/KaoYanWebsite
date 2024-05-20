@@ -25,6 +25,8 @@ public interface UserService {
     List<School> getSchool()throws Exception;
     //根据条件查询院校分数线
     public List<Score> getScoreList(String schoolName, int year);
+    //根据用户id得到用户信息
+    public User getUserById(int userId);
     //获取该用户收到的未读评论
     public List<Comment> getNotReadComment(String receiver);
     //获取未读的信息个数

@@ -10,4 +10,5 @@ public interface PostService {
     public int addPost(Post post);
     public Post findPostById(int id);
     public ArrayList<Post> getPostListBySchoolId(int schoolId) throws SQLException;
+    public int getUserIdByPostId(int postId) throws SQLException;
 }

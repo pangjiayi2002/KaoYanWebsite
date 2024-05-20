@@ -149,6 +149,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserById(int userId) {
+        Connection connection=null;
+        User user=null;
+        try{
+            connection=BaseDao.getConnection();
+            user=userDao.getUserById(connection,userId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return user;
+    }
     public List<Comment> getNotReadComment(String receiver) {
         Connection connection = null;
         List<Comment> commentList = null;

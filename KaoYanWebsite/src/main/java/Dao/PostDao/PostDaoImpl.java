@@ -39,6 +39,7 @@ public class PostDaoImpl implements PostDao{
         PreparedStatement pstm=null;
         ResultSet rs=null;
         Post post=new Post();
+        byte[] avatar=null;
         if(null!=connection){
             String sql="select * from post where id=?";
             Object[] params={id};
@@ -49,6 +50,10 @@ public class PostDaoImpl implements PostDao{
                 post.setContent(rs.getString("content"));
                 post.setUsername(rs.getString("username"));
                 post.setSchoolId(rs.getInt("schoolId"));
+                post.setUserId(rs.getInt("userId"));
+                //通过userId找到用户的头像
+                avatar=userDao.getAvatar(connection,rs.getInt("userId"));
+                post.setAvatar(avatar);
             }
             BaseDao.closeResource(null,pstm,rs);
         }
@@ -87,6 +92,25 @@ public class PostDaoImpl implements PostDao{
         }
         return postList;
     }
+
+    @Override
+    public int getUserIdByPostId(Connection connection, int postId) throws SQLException {
+        PreparedStatement pstm=null;
+        ResultSet rs=null;
+        int userId=-1;
+        if(null!=connection){
+            List<Object> list=new ArrayList<>();
+            String sql="select * from post where id=?";
+            Object[] params= {postId};
+            rs=BaseDao.execute(connection,pstm,rs,sql,params);
+            if (rs.next()){
+                userId=rs.getInt("userId");
+            }
+            BaseDao.closeResource(null,pstm,rs);
+        }
+        return userId;
+    }
+
     public int getPostCommentAmount(Connection connection,PreparedStatement pstm,int postId) throws SQLException {
         int commentAmount=0;
         ResultSet rs=null;

@@ -31,7 +31,6 @@ public class PostDetailServlet extends HttpServlet {
         //通过id找到帖子
         Post post=postService.findPostById(id);
         //通过发帖人的id找到发帖人
-
         //通过帖子id返回所有评论
         ArrayList<Comment> commentList=null;
         try {
@@ -40,6 +39,7 @@ public class PostDetailServlet extends HttpServlet {
                 session.setAttribute("commentList",commentList);
                 session.setAttribute("NoCommentMsg","");
             }else{
+                session.setAttribute("commentList",commentList);
                 session.setAttribute("NoCommentMsg","-该帖子暂无评论-");
             }
         } catch (SQLException e) {

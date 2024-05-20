@@ -1,4 +1,7 @@
-<%--
+<%@ page import="pojo.Post" %>
+<%@ page import="util.ImageUtil" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="pojo.Comment" %><%--
   Created by IntelliJ IDEA.
   User: a
   Date: 2024/4/22
@@ -58,7 +61,8 @@
             reply_overlay.style.display="none";
         }
         function back(){
-            history.back();
+            // history.back();
+            window.location.href="postHomeServlet?school_id=${sessionScope.school_id}&user_id=${sessionScope.user_id}"
         }
 
     </script>
@@ -72,7 +76,21 @@
                 <div id="user_container" style="display: flex;align-items: center;flex-direction: column">
                     <%--        <img src="${sessionScope.user.avatar}">--%>
                     <%--        <h4>${sessionScope.user.username}</h4>--%>
-                    <img src=".\pic\dog.jpg" height="40px" width="40px" style="float: left">
+                        <%
+                            Post post= (Post) session.getAttribute("postDetail");
+                            byte[] avatar= post.getAvatar();
+                            String base64Image= ImageUtil.byteToBase64(avatar);
+                            boolean avatarIsNull=(avatar!=null);
+                        %>
+                        <c:choose>
+                            <c:when test="<%=avatarIsNull%>">
+                                <img  class="to" alt="图片加载失败" src="data:image/jpeg;base64,<%=base64Image%>" height="40px" width="40px">
+                            </c:when>
+                            <c:otherwise>
+                                <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top" alt="加载图片失败">
+                            </c:otherwise>
+                        </c:choose>
+<%--                    <img src=".\pic\dog.jpg" height="40px" width="40px" style="float: left">--%>
                     <h2>${sessionScope.postDetail.username}</h2>
                 </div>
             </td>
@@ -116,10 +134,34 @@
     <div id="comments" class="comments" style="margin-left: 10px">
             <h4 style="color: darkgray">${sessionScope.NoCommentMsg}</h4>
         <table>
+            <%
+                int i=0;
+            %>
             <c:forEach var="comment" items="${sessionScope.commentList}">
                 <tr>
                     <td>
-                        <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top;margin: 5px">
+                        <%
+                            ArrayList<Comment> commentList= (ArrayList<Comment>) session.getAttribute("commentList");
+                            Comment comment=commentList.get(i);
+                            byte[] comment_avatar= comment.getAvater();
+                            String comment_base64Image=null;
+                            if(comment_avatar!=null) {
+                                comment_base64Image = ImageUtil.byteToBase64(comment_avatar);
+                            }else{
+                                comment_base64Image=null;
+                            }
+                            boolean comment_avatarIsNull=(comment_avatar!=null);
+                        %>
+                        <c:choose>
+                            <c:when test="<%=comment_avatarIsNull%>">
+                                <img  class="to" alt="图片加载失败" src="data:image/jpeg;base64,<%=comment_base64Image%>" height="40px" width="40px">
+                            </c:when>
+                            <c:otherwise>
+                                <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top" alt="加载图片失败">
+                            </c:otherwise>
+                        </c:choose>
+
+<%--                        <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top;margin: 5px">--%>
                     </td>
                     <td>
                         <h3 style="margin: 5px">${comment.sender}@${comment.receiver}:${comment.content}</h3>
@@ -140,9 +182,11 @@
                             <label>回复:</label>
                             <h4>@${comment.sender}</h4>
                             <form action="replyServlet" method="post">
+                                <input type="hidden" name="senderId" value="${comment.senderId}">
                                 <textarea name="replyContent" cols="60" rows="10" style="margin: 10px" placeholder="请输入回复内容"></textarea>
                                 <div class="reply_buttons" style="display: flex;justify-content: center">
-                                    <button class="reply_close_btn" style="width: 100px;height: 30px" onclick="closeReplyDialog(${comment.commentId})">关闭</button>
+                                    <input type="button" class="close_btn" value="关闭"style="width: 100px;height: 30px;color: #0069d9" onclick="closeReplyDialog(${comment.commentId})">
+<%--                                    <button class="reply_close_btn" style="width: 100px;height: 30px" onclick="closeReplyDialog(${comment.commentId})">关闭</button>--%>
                                     <input type="hidden" name="username" value="${comment.sender}">
                                     <input type="hidden" name="commentId" value="${comment.commentId}">
                                     <input type="hidden" name="postId" value="${comment.postId}">

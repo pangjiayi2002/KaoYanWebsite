@@ -16,7 +16,10 @@
 <body>
 <div class="container">
     <div id="top">
-        <h1 style="color: #78b3ef;float: left;font-size: 50px">欢迎来到{}交流社区</h1>
+        <h1 style="color: #78b3ef;float: left;font-size: 50px">欢迎来到
+            <span style="font-family: 'Courier New';color: #5994d6">${sessionScope.schoolName}</span>
+            交流社区
+        </h1>
         <input type="button" class="back_btn" style="float: right" value="返回" onclick="">
     </div>
     <div id="middle">
