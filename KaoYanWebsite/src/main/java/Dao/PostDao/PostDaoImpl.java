@@ -1,6 +1,7 @@
 package Dao.PostDao;
 
 import Dao.BaseDao;
+import pojo.Post;
 import Dao.userdao.UserDao;
 import Dao.userdao.UserDaoImpl;
 import pojo.Post;

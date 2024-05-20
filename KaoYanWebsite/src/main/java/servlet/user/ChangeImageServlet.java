@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import service.user.UserService;
 import service.user.UserServiceImpl;
-import util.ImageUtil;
 
 import java.io.*;
 @MultipartConfig

@@ -1,5 +1,6 @@
 package Dao.userdao;
 
+import pojo.Comment;
 import pojo.School;
 import pojo.Score;
 import pojo.User;
@@ -33,4 +34,9 @@ public interface UserDao {
 //    //获取未读评论
 //    int notRead(Connection connection,String username)throws Exception;
     User getUserById(Connection connection,int userId);
+    //获取该用户收到的未读评论
+    List<Comment> getNotReadComment(Connection connection, String receiver)throws Exception;
+    //获取未读评论
+    int notRead(Connection connection,String receiver)throws Exception;
+
 }

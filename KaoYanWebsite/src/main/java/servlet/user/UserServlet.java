@@ -16,7 +16,6 @@ import util.Constants;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String method = request.getParameter("method");
-        System.out.println("method="+method);
+//        System.out.println("method="+method);
         if (method.equals("savepwd")&&method!=null){
             this.updatePwd(request,response);
         }else if (method.equals("pwdmodify")&&method!=null){
@@ -49,7 +48,7 @@ public class UserServlet extends HttpServlet {
     public void updatePwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object o = request.getSession().getAttribute(Constants.USER_SESSION);
         String newpassword = request.getParameter("newpassword");
-        System.out.println("newpassword:"+newpassword);
+//        System.out.println("newpassword:"+newpassword);
         boolean flag=false;
         if (o!=null && newpassword!=null){
             UserService userService=new UserServiceImpl();
@@ -69,7 +68,7 @@ public class UserServlet extends HttpServlet {
     public void pwdModify(HttpServletRequest request, HttpServletResponse response){
         Object o = request.getSession().getAttribute(Constants.USER_SESSION);
         String oldpassword = request.getParameter("oldpassword");
-        System.out.println("oldpassword"+oldpassword);
+//        System.out.println("oldpassword"+oldpassword);
         //万能的map
         Map<String,String> resultMap=new HashMap<>();
         if (o==null){//session失效/过期
