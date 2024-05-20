@@ -143,7 +143,7 @@
                         <%
                             ArrayList<Comment> commentList= (ArrayList<Comment>) session.getAttribute("commentList");
                             Comment comment=commentList.get(i);
-                            byte[] comment_avatar= comment.getAvater();
+                            byte[] comment_avatar= comment.getAvatar();
                             String comment_base64Image=null;
                             if(comment_avatar!=null) {
                                 comment_base64Image = ImageUtil.byteToBase64(comment_avatar);
