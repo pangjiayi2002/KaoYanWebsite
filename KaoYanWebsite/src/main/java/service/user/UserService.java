@@ -24,5 +24,6 @@ public interface UserService {
     List<School> getSchool()throws Exception;
     //根据条件查询院校分数线
     public List<Score> getScoreList(String schoolName, int year);
-
+    //根据用户id得到用户信息
+    public User getUserById(int userId);
 }

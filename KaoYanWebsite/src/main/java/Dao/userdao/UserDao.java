@@ -32,5 +32,5 @@ public interface UserDao {
 //    List<Evaluate> getAllEvaluate(Connection connection,String username)throws Exception;
 //    //获取未读评论
 //    int notRead(Connection connection,String username)throws Exception;
-
+    User getUserById(Connection connection,int userId);
 }

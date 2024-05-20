@@ -6,18 +6,22 @@ import java.util.Date;
 public class Comment {
     private int commentId;
     private String sender;
+    private int senderId;
     private int postId;
     private String receiver;
+    private int receiverId;
     private String content;
     private int isRead;
     private Date time;
-    private Blob avatar;
+    private byte[] avatar;
 
-    public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead, Date time,Blob avatar) {
+    public Comment(int commentId, String sender,int senderId,int postId, String receiver,int receiverId, String content, int isRead, Date time,byte[] avatar) {
         this.commentId = commentId;
         this.sender = sender;
+        this.senderId=senderId;
         this.postId = postId;
         this.receiver = receiver;
+        this.receiverId=receiverId;
         this.content = content;
         this.isRead = isRead;
         this.time = time;
@@ -81,11 +85,23 @@ public class Comment {
         this.time = time;
     }
 
-    public Blob getAvater() {
+    public byte[] getAvater() {
         return avatar;
     }
 
-    public void setAvater(Blob avatar) {
+    public void setAvater(byte[] avatar) {
         this.avatar = avatar;
+    }
+    public int getSenderId(){
+        return senderId;
+    }
+    public void setSenderId(int senderId){
+        this.senderId=senderId;
+    }
+    public int getReceiverId() {
+        return receiverId;
+    }
+    public void setReceiverId(int receiverId){
+        this.receiverId=receiverId;
     }
 }

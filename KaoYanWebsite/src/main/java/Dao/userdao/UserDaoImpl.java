@@ -184,6 +184,31 @@ public class UserDaoImpl implements UserDao{
         BaseDao.closeResource(null, pstm, rs);
         return scoreList;
     }
+
+    @Override
+    public User getUserById(Connection connection, int userId) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        User user= null;
+        try {
+            if (null != connection) {
+                String sql = "select * from kaoyanwebsite.user where id=?";
+                Object[] params = {userId};
+                rs = BaseDao.execute(connection, pstm, rs, sql, params);
+                if (rs.next()) {
+                    user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setPassword(rs.getString("password"));
+//                    user.setAvatar(rs.getByte("avatar"));
+                }
+            }
+            BaseDao.closeResource(null, pstm, rs);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
+    }
 }
 
 

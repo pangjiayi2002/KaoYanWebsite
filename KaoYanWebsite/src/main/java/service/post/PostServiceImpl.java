@@ -70,4 +70,19 @@ public class PostServiceImpl implements PostService{
         }
         return postList;
     }
+
+    @Override
+    public int getUserIdByPostId(int postId) throws SQLException {
+        Connection connection=null;
+        int userId=-1;
+        try {
+            connection = BaseDao.getConnection();
+            userId = postDao.getUserIdByPostId(connection, postId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return userId;
+    }
 }
