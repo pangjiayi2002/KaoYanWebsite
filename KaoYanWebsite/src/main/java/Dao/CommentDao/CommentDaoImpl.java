@@ -37,7 +37,7 @@ public class CommentDaoImpl implements CommentDao{
                 comment.setReceiverId(rs.getInt("receiverId"));
                 //通过userId找到用户的头像
                 avatar=userDao.getAvatar(connection,rs.getInt("senderId"));
-                comment.setAvater(avatar);
+                comment.setAvatar(avatar);
                 //comment.setAvater(rs.getBytes("avatar"));
                 commentList.add(comment);
             }

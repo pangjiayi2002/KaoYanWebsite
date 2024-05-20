@@ -11,7 +11,33 @@ public class Comment {
     private String content;
     private int isRead;
     private Date time;
-    private Blob avatar;
+    private byte[] avatar;
+    private int senderId;
+    private int receiverId;
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public int getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(int receiverId) {
+        this.receiverId = receiverId;
+    }
 
     public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead) {
         this.commentId = commentId;
@@ -22,7 +48,7 @@ public class Comment {
         this.isRead = isRead;
     }
 
-    public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead, Date time, Blob avatar) {
+    public Comment(int commentId, String sender, int postId, String receiver, String content, int isRead, Date time, byte[] avatar) {
         this.commentId = commentId;
         this.sender = sender;
         this.postId = postId;
@@ -88,13 +114,5 @@ public class Comment {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public Blob getAvater() {
-        return avatar;
-    }
-
-    public void setAvater(Blob avatar) {
-        this.avatar = avatar;
     }
 }
