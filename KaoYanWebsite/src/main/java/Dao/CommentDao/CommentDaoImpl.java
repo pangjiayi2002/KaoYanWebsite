@@ -58,4 +58,42 @@ public class CommentDaoImpl implements CommentDao{
         }
         return updateRows;
     }
+
+    @Override
+    public Comment getCommentByCommentId(Connection connection, int commentId) throws SQLException {
+        PreparedStatement pstm=null;
+        ResultSet rs=null;
+        Comment comment=new Comment();
+        if(null!=connection){
+            String sql="select * from comment where commentId=?";
+            Object[] params={commentId};
+            rs= BaseDao.execute(connection,pstm,rs,sql,params);
+            if (rs.next()){
+                comment.setCommentId(rs.getInt("commentId"));
+                comment.setSender(rs.getString("sender"));
+                comment.setPostId(rs.getInt("postId"));
+                comment.setReceiver(rs.getString("receiver"));
+                comment.setContent(rs.getString("content"));
+                comment.setIsRead(rs.getInt("isRead"));
+                comment.setTime(rs.getTimestamp("time"));
+                comment.setSenderId(rs.getInt("senderId"));
+                comment.setReceiverId(rs.getInt("receiverId"));
+            }
+            BaseDao.closeResource(null,pstm,rs);
+        }
+        return comment;
+    }
+
+    @Override
+    public int deleteComment(Connection connection, int commentId) {
+        PreparedStatement pstm=null;
+        int flag=0;
+        if(null!=connection){
+            String sql="delete from comment where commentId=?";
+            Object[] params={commentId};
+            flag=BaseDao.execute(connection,pstm,sql,params);
+            BaseDao.closeResource(null,pstm,null);
+        }
+        return flag;
+    }
 }

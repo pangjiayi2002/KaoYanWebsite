@@ -12,6 +12,39 @@
     <title>交流社区</title>
     <link type="text/css" rel="stylesheet" href="css/community.css"/>
     <script type="text/javascript" src="js/community.js"></script>
+    <script>
+        //删除帖子
+        function confirmDelete(postId) {
+            var confirmed = confirm("确定要删除这篇帖子吗？");
+            if (confirmed) {
+                deleteComment(postId);
+            }
+        }
+
+        function deleteComment(postId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "deletePost", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    location.reload(); // 删除成功后刷新页面
+                } else if (xhr.readyState === 4) {
+                    alert("删除失败！");
+                }
+            };
+            xhr.send("postId=" + postId);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".post-row");
+            rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    var postId = row.getAttribute("data-post-id");
+                    confirmDelete(postId);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -39,13 +72,13 @@
             </form>
 
         </div>
-        <table class="altrowstable" id="alternatecolor">
+        <table class="altrowstable" id="alternatecolor" style="width: 90%">
             <%
                 int i=0;
             %>
             <c:forEach var="post" items="${sessionScope.postList}">
                 <tr>
-                    <td>
+                    <td style="width: 20%">
                         <div style="width: 100px;display: flex;flex-direction: column;">
                             <%@page import="java.util.Base64" %>
                             <%@ page import="pojo.Post" %>
@@ -75,13 +108,13 @@
                             <h4>${post.username}</h4>
                         </div>
                     </td>
-                    <td>
+                    <td style="width: 60%">
                         <div>
                             <a href="PostDetailServlet?id=${post.id}">${post.title}</a>
-                            <h2>${post.content}</h2>
+                            <h2 class="post-row" data-post-id="${post.id}">${post.content}</h2>
                         </div>
                     </td>
-                    <td>
+                    <td style="width: 20%">
                         <div class="comment-box" style="width: 60px">
                             <p>评论数:${post.commentAmount}</p>
                         </div>

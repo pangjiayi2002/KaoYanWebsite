@@ -37,4 +37,34 @@ public class CommentServiceImpl implements CommentService{
         return updateRows;
     }
 
+    @Override
+    public Comment getCommentByCommentId(int commentId) {
+        Connection connection=null;
+        Comment comment=null;
+        try{
+            connection= BaseDao.getConnection();
+            comment=commentDao.getCommentByCommentId(connection,commentId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return comment;
+    }
+
+    @Override
+    public int deleteComment(int commentId) {
+        Connection connection=null;
+        int flag=0;
+        try{
+            connection=BaseDao.getConnection();
+            if(commentDao.deleteComment(connection,commentId)>0){
+                flag=1;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return flag;
+    }
+
 }

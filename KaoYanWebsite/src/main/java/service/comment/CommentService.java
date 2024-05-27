@@ -8,4 +8,6 @@ import java.util.ArrayList;
 public interface CommentService {
     public ArrayList<Comment> getCommentListByPostId(int postId) throws SQLException;
     public int addComment(Comment comment);
+    public Comment getCommentByCommentId(int commentId);
+    public int deleteComment(int commentId);
 }

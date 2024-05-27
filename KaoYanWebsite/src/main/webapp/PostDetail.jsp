@@ -64,7 +64,37 @@
             // history.back();
             window.location.href="postHomeServlet?school_id=${sessionScope.school_id}&user_id=${sessionScope.user_id}"
         }
+        //删除评论
+        function confirmDelete(commentId) {
+            var confirmed = confirm("确定要删除这条评论吗？");
+            if (confirmed) {
+                deleteComment(commentId);
+            }
+        }
 
+        function deleteComment(commentId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "deleteComment", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    location.reload(); // 删除成功后刷新页面
+                } else if (xhr.readyState === 4) {
+                    alert("删除失败！");
+                }
+            };
+            xhr.send("commentId=" + commentId);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".comment-row");
+            rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    var commentId = row.getAttribute("data-comment-id");
+                    confirmDelete(commentId);
+                });
+            });
+        });
     </script>
 </head>
 <body>
@@ -151,6 +181,7 @@
                                 comment_base64Image=null;
                             }
                             boolean comment_avatarIsNull=(comment_avatar!=null);
+                            i=i+1;
                         %>
                         <c:choose>
                             <c:when test="<%=comment_avatarIsNull%>">
@@ -163,7 +194,7 @@
 
 <%--                        <img src=".\pic\dog.jpg" height="20px" width="20px" style="float: left;vertical-align: top;margin: 5px">--%>
                     </td>
-                    <td>
+                    <td class="comment-row" data-comment-id="${comment.commentId}">
                         <h3 style="margin: 5px">${comment.sender}@${comment.receiver}:${comment.content}</h3>
                     </td>
                     <td>

@@ -111,6 +111,19 @@ public class PostDaoImpl implements PostDao{
         return userId;
     }
 
+    @Override
+    public int deletePost(Connection connection, int postId) {
+        PreparedStatement pstm=null;
+        int flag=0;
+        if(null!=connection){
+            String sql="delete from post where id=?";
+            Object[] params={postId};
+            flag=BaseDao.execute(connection,pstm,sql,params);
+            BaseDao.closeResource(null,pstm,null);
+        }
+        return flag;
+    }
+
     public int getPostCommentAmount(Connection connection,PreparedStatement pstm,int postId) throws SQLException {
         int commentAmount=0;
         ResultSet rs=null;

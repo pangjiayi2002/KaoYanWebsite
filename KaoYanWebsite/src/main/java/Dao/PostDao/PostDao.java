@@ -11,4 +11,5 @@ public interface PostDao {
     Post findPostById(Connection connection,int id) throws SQLException;
     ArrayList<Post> getPostListBySchoolId(Connection connection,int schoolId) throws SQLException;
     int getUserIdByPostId(Connection connection,int postId) throws SQLException;
+    int deletePost(Connection connection,int postId);
 }

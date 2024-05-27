@@ -85,4 +85,21 @@ public class PostServiceImpl implements PostService{
         }
         return userId;
     }
+
+    @Override
+    public int deletePost(int postId) {
+        Connection connection=null;
+        int flag=0;
+        try{
+            connection=BaseDao.getConnection();
+            if(postDao.deletePost(connection,postId)>0){
+                flag=1;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            BaseDao.closeResource(connection,null,null);
+        }
+        return flag;
+    }
 }
