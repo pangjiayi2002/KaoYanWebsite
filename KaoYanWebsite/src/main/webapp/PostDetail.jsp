@@ -21,9 +21,52 @@
             padding: 10px;
             float: left;
         }
+
+        /* 遮罩层样式 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none; /* 默认隐藏 */
+        }
+        /*弹窗样式*/
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* 默认隐藏 */
+        }
+        /*返回按钮*/
+        input.back_btn{
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #C0C0C0;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;float: right
+        }
+        button{
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
-    <link type="text/css" rel="stylesheet" href="css/community.css">
-    <script type="text/javascript" src="js/community.js"></script>
+<%--    <link type="text/css" rel="stylesheet" href="css/community.css">--%>
+<%--    <script type="text/javascript" src="js/community.js"></script>--%>
     <script>
         // function toggleReplyForm(commentId){
         //     var replyForm=document.getElementById("replyForm_"+commentId);
@@ -38,6 +81,19 @@
         //     var replyForm=document.getElementById("replyForm_"+commentId);
         //     replyForm.style.display="none";
         // }
+        function showDialog(){
+            var popup=document.getElementById("popup");
+            var overlay=document.getElementById("overlay")
+            popup.style.display="block";
+            overlay.style.display="block";
+        }
+        function closeDialog(){
+            var popup=document.getElementById("popup");
+            var overlay=document.getElementById("overlay")
+            popup.style.display="none";
+            overlay.style.display="none";
+        }
+
         function showReplyDialog(commentId){
             var reply_popup=document.getElementById("reply_popup_"+commentId);
             var reply_overlay=document.getElementById("reply_overlay_"+commentId);
