@@ -19,6 +19,6 @@
     <h1>考研小站</h1>
     <div class="publicHeaderR">
         <p><span>下午好！</span><span style="color: #fff21b">${userSession.username}</span> , 欢迎你！</p>
-        <a href="${pageContext.request.contextPath}/LogoutServlet">退出</a>
+        <a onclick="back()">返回</a>
     </div>
 </header>
