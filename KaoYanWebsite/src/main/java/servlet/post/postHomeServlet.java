@@ -12,6 +12,7 @@ import service.school.SchoolService;
 import service.school.SchoolServiceImpl;
 import service.user.UserService;
 import service.user.UserServiceImpl;
+import util.Constants;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,6 +45,7 @@ public class postHomeServlet extends HttpServlet {
         session.setAttribute("schoolName",schoolName);
         session.setAttribute("user_id",userId);
         session.setAttribute("user",user);
+        session.setAttribute(Constants.USER_SESSION,user);
         session.setAttribute("school_id",schoolId);
         request.getRequestDispatcher("community.jsp").forward(request,response);
     }

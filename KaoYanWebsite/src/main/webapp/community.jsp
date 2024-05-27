@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>交流社区</title>
-    <link type="text/css" rel="stylesheet" href="css/community.css"/>
+<%--    <link type="text/css" rel="stylesheet" href="css/community.css"/>--%>
     <script type="text/javascript" src="js/community.js"></script>
     <script>
         //删除帖子
@@ -44,7 +44,227 @@
                 });
             });
         });
+
+        function altRows(id){
+            if(document.getElementsByTagName){
+                var table=document.getElementById(id);
+                var rows=table.getElementsByTagName("tr");
+
+                for(i=0;i<rows.length;i++){
+                    if(i%2==0){
+                        rows[i].className="evenrowcolor"
+                    }else{
+                        rows[i].className="oddrowcolor";
+                    }
+                }
+            }
+        }
+        window.onload=function (){
+            altRows('alternatecolor')
+        }
+        // const openbtn=document.getElementById('openbtn');
+        // const closebtn=document.getElementById('close_btn');
+        //const popup=document.getElementsByClassName('popup');
+        //const overlay=document.getElementsByClassName('overlay');
+        // openbtn.addEventListener('click',function (){
+        //     popup.style.display='block';
+        //     overlay.style.display='block';
+        // })
+        // /*弹出对话框*/
+        // function showDialog(){
+        //     var dialog=document.getElementById("dialog");
+        //     dialog.style.display="block";
+        // }
+        // /*关闭对话框*/
+        // function closeDialog(){
+        //     var dialog=document.getElementById("dialog");
+        //     dialog.style.display="none";
+        // }
+        function showDialog(){
+            var popup=document.getElementById("popup");
+            var overlay=document.getElementById("overlay")
+            popup.style.display="block";
+            overlay.style.display="block";
+        }
+        function closeDialog(){
+            var popup=document.getElementById("popup");
+            var overlay=document.getElementById("overlay")
+            popup.style.display="none";
+            overlay.style.display="none";
+        }
+        // const reply_popup=document.getElementsByClassName("reply_popup");
+        // const reply_overlay=document.getElementsByClassName("reply_overlay")
+        function showReplyDialog(commentId){
+            var reply_popup=document.getElementById("reply_popup_"+commentId.toString());
+            var reply_overlay=document.getElementById("reply_overlay_"+commentId.toString())
+            // var usernameElement=document.getElementById("username")
+            // usernameElement.textContent="@"+username;
+            reply_popup.style.display="block";
+            reply_overlay.style.display="block";
+        }
+        function closeReplyDialog(commentId){
+            var reply_popup=document.getElementById("reply_popup_"+commentId.toString());
+            var reply_overlay=document.getElementById("reply_overlay_"+commentId.toString());
+            reply_popup.style.display="none";
+            reply_overlay.style.display="none";
+        }
+        // var reply_btn=document.getElementById("reply");
+        // reply_btn.onclick=function (){
+        //     showReplyDialog(username);
+        // }
+        function toggleReplyForm(commentId){
+            var replyForm=document.getElementById("replyForm_"+commentId);
+            if(replyForm.style.display=="none"){
+                replyForm.style.display="block";
+            }
+            else{
+                replyForm.style.display="none";
+            }
+        }
+        function closeReplyForm(commentId){
+            var replyForm=document.getElementById("replyForm_"+commentId);
+            replyForm.style.display="none";
+        }
     </script>
+    <style>
+        /*返回按钮*/
+        input.back_btn{
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #C0C0C0;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;float: right
+        }
+
+        table.altrowstable {
+            font-family: verdana,arial,sans-serif;
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #62b9db;
+            border-collapse: collapse;
+        }
+        table.altrowstable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            /*border-color: #a9c6c9;*/
+        }
+        table.altrowstable td {
+            border-width: 0px;
+            padding: 8px;
+            border-style: solid;
+            /*border-color: #89e2ee;*/
+        }
+        .oddrowcolor{
+            background-color: #e6fafa;
+        }
+        .evenrowcolor{
+            background-color: #c5d8e0;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+        }
+        /*发帖的遮罩和弹窗*/
+        /* 遮罩层样式 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none; /* 默认隐藏 */
+        }
+        /*弹窗样式*/
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* 默认隐藏 */
+        }
+        /*回复的遮罩和弹窗*/
+        /*遮罩样式*/
+        .reply_overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none; /* 默认隐藏 */
+        }
+        /*弹窗样式*/
+        .reply_popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* 默认隐藏 */
+        }
+        label {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        button{
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+        .buttons{
+            text-align: center;
+            margin-top: 20px;
+        }
+        input.reply_btn{
+            font-size: 10px;
+            background-color: #C0C0C0;
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+        /*显示评论数的框*/
+        .comment-box{
+            background-color: #f2f2f2;
+            /*padding: 10px;*/
+            /*border-radius: 5px;*/
+            width: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
