@@ -34,4 +34,9 @@ public interface UserService {
     //已读评论将isread从1修改为0
     public boolean modifyIsRead(int commentId) throws Exception;
 
+    List<User> list(int page, int pageSize, String name);
+
+    int deleteById(String sid);
+
+    int count(String name);
 }
