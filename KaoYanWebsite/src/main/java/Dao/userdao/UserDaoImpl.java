@@ -258,7 +258,7 @@ public class UserDaoImpl implements UserDao{
         int flag = 0;
         PreparedStatement pstm = null;
         if (null != connection) {
-            String sql = "update comment set isread=1 where commentId = ? ";
+            String sql = "update comment set isRead=1 where commentId = ? ";
             Object[] params = {commentId};
             flag = BaseDao.execute(connection, pstm, sql, params);
             BaseDao.closeResource(null, pstm, null);
