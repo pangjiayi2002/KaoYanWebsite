@@ -11,6 +11,8 @@
 <form action="postHomeServlet" method="post">
   <input type="submit" value="社区">
 </form>
-<a href="postHomeServlet?school_id=1&user_id=2">click</a>
+<a href="postHomeServlet?school_id=1&user_id=2">click</a><br/>
+
+<a href="/ListServlet">用户管理</a>
 </body>
 </html>

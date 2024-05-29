@@ -5,15 +5,18 @@ public class User {
     private String username;
     private String password;
     private byte[] avatar;
+    private String avatarStr;
+    private int role;
 
     public User() {
     }
 
-    public User(int id, String username, String password, byte[] avatar) {
+    public User(int id, String username, String password, byte[] avatar,int role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.avatar = avatar;
+        this.role = role;
     }
 
     public int getId() {
@@ -48,6 +51,22 @@ public class User {
         this.avatar = avatar;
     }
 
+    public String getAvatarStr() {
+        return avatarStr;
+    }
+
+    public void setAvatarStr(String avatarStr) {
+        this.avatarStr = avatarStr;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -55,6 +74,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", avatar=" + avatar +
+                ", avatarStr=" + avatarStr +
+                ", role=" + role +
                 '}';
     }
 }

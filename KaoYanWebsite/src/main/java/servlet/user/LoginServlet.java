@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
                     System.out.println("文件不存在");
                 }
             }
-//            response.sendRedirect("jsp/frame.jsp");
+            response.sendRedirect("index.jsp");
         }else {
             request.setAttribute("error","用户名或者密码不正确");
             request.getRequestDispatcher("login.jsp").forward(request,response);

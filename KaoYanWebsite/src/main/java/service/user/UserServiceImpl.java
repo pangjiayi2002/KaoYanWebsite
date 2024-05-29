@@ -10,6 +10,7 @@ import pojo.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
@@ -28,6 +29,55 @@ public class UserServiceImpl implements UserService{
             BaseDao.closeResource(connection,null,null);
         }
         return user;
+    }
+
+    @Override
+    public int deleteById(String id) {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            //通过业务层调用对应的具体数据库操作
+            count = userDao.deleteById(connection,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+    @Override
+    public int count(String name) {
+        Connection connection = null;
+        int count = 0;
+        try {
+            connection = BaseDao.getConnection();
+            //通过业务层调用对应的具体数据库操作
+            count = userDao.count(connection,name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, null, null);
+        }
+        return count;
+    }
+
+
+    @Override
+    public List<User> list(int page, int pageSize, String name) {
+        Connection connection = null;
+        List<User> userList = null;
+        try {
+            connection = BaseDao.getConnection();
+            //通过业务层调用对应的具体数据库操作
+            userList = userDao.list(connection,page,pageSize,name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeResource(connection, null, null);
+        }
+        return userList;
     }
 
     @Override

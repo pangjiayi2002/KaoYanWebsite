@@ -1,14 +1,13 @@
 package Dao.userdao;
 
 import Dao.BaseDao;
-import pojo.Comment;
-import pojo.School;
-import pojo.Score;
-import pojo.User;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.handler.BeanListHandler;
+import pojo.*;
+import util.ImageUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao{
@@ -265,6 +264,83 @@ public class UserDaoImpl implements UserDao{
         }
         return flag;
     }
+
+
+    @Override
+    public List<User> list(Connection connection,int page, int pageSize, String name) throws SQLException{
+        PreparedStatement pstm=null;
+        ResultSet rs=null;
+        ArrayList<User> users=new ArrayList<>();
+        byte[] avatar=null;
+        if(null!=connection){
+            List<Object> list=new ArrayList<>();
+            String sql="";Object[] params = new Object[0];
+            if (StrUtil.isBlank(name)) {
+                sql = "select * from user ";
+            } else {
+                sql = "select * from user where username = ?";
+            }
+            if (StrUtil.isNotBlank(name)) {
+                params= new Object[]{name};
+            }
+
+            rs=BaseDao.execute(connection,pstm,rs,sql,params);
+            while(rs.next()){
+                User user=new User();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setAvatar(rs.getBytes("avatar"));
+                user.setRole(rs.getInt("role"));
+                if (user.getAvatar() != null && user.getAvatar().length>0) {
+                    user.setAvatarStr(ImageUtil.byteToBase64(user.getAvatar()));
+                }
+                users.add(user);
+            }
+            BaseDao.closeResource(null,pstm,rs);
+        }
+        return users;
+    }
+
+    @Override
+    public int count(Connection connection,String name) throws SQLException {
+
+        int count = 0;ResultSet rs=null;
+        PreparedStatement pstm = null;
+        if (null != connection) {
+            String sql = "";
+            Object[] params = new Object[0];
+            if (StrUtil.isBlank(name)) {
+                 sql = "select count(1)  from user ";
+            } else {
+                 sql = "select count(1) from user where username = ?";
+            }
+            if (StrUtil.isNotBlank(name)) {
+                params= new Object[]{name};
+            }
+            rs=BaseDao.execute(connection,pstm,rs,sql,params);
+            while(rs.next()){
+                count = rs.getInt(1);
+            }
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return count;
+
+    }
+
+    @Override
+    public int deleteById(Connection connection, String id) {
+
+        int flag = 0;
+        PreparedStatement pstm = null;
+        if (null != connection) {
+            String sql = "delete from user where id=? ";
+            Object[] params = {id};
+            flag = BaseDao.execute(connection, pstm, sql, params);
+            BaseDao.closeResource(null, pstm, null);
+        }
+        return flag;
+    }
+
 }
 
 

@@ -41,4 +41,9 @@ public interface UserDao {
     //已读评论将isread从1修改为0
     int modifyIsRead(Connection connection, int commentId) throws Exception;
 
+    List<User> list(Connection connection,int page, int pageSize, String name) throws SQLException;
+
+    int deleteById(Connection connection, String id);
+
+    int count(Connection connection,String name) throws SQLException;
 }
