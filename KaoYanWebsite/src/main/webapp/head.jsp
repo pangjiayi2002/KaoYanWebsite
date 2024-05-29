@@ -19,6 +19,6 @@
     <h1>修改个人信息</h1>
     <div class="publicHeaderR">
         <p><span>您好！</span><span style="color: #fff21b"></span>  欢迎你！</p>
-        <a>退出</a>
+        <a onclick="window.location.href='${pageContext.request.contextPath}/PersonalCenter.jsp'">返回</a>
     </div>
 </header>
