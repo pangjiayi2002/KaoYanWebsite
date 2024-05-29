@@ -14,7 +14,10 @@ import service.user.UserService;
 import service.user.UserServiceImpl;
 import util.Constants;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -30,6 +33,24 @@ public class postHomeServlet extends HttpServlet {
         int schoolId= Integer.parseInt(request.getParameter("school_id"));
         int userId= Integer.parseInt(request.getParameter("user_id"));
         User user=userService.getUserById(userId);
+        if (user!=null){
+            request.getSession().setAttribute(Constants.USER_SESSION,user);
+            Object o = request.getSession().getAttribute(Constants.USER_SESSION);
+            if(userService.getPersonalAvatar(((User)o).getId())==null) {
+                String filePath = "D:\\git\\KaoYanWebsite\\KaoYanWebsite\\src\\main\\webapp\\pic\\OIP.jpg";
+                File file = new File(filePath);
+                if (file.exists()) {
+                    try (InputStream inputStream = new FileInputStream(file)) {
+                        byte[] avatar = inputStream.readAllBytes();
+                        userService.change(avatar, ((User) o).getId());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("文件不存在");
+                }
+            }
+        }
         //返回学校名
         School school =schoolService.findSchoolById(schoolId);
         String schoolName=school.getSchool_name();

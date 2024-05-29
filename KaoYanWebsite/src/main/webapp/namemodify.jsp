@@ -9,7 +9,7 @@
             <ul class="list">
                 <li><a href="${pageContext.request.contextPath}/namemodify.jsp?method=query">昵称修改</a></li>
                 <li><a href="${pageContext.request.contextPath}/pwdmodify.jsp">密码修改</a></li>
-                <li><a href="${pageContext.request.contextPath}/LogoutServlet">退出系统</a></li>
+<%--                <li><a href="${pageContext.request.contextPath}/LogoutServlet">退出系统</a></li>--%>
             </ul>
         </nav>
     </div>

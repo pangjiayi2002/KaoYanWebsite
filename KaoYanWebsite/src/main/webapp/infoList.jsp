@@ -67,7 +67,7 @@
         <h2 class="leftH2">
             <span class="span1"></span>消息列表
             <span>
-                <input type="button" class="back_btn" style="float: right" value="返回" onclick="back()">
+                <input type="button" class="back_btn" style="float: right" value="返回" onclick="window.location.href='${pageContext.request.contextPath}/PersonalCenter.jsp'">
             </span>
         </h2>
     </div>
@@ -80,9 +80,10 @@
                             <form action="${pageContext.request.contextPath}/PostDetailServlet" method="post" style="display: flex; align-items: center;">
                                 <input type="hidden" name="id" value="${comment.postId}">
                                 <input type="hidden" name="commentId" value="${comment.commentId}">
-                                <span style="margin-right: 10px;" id="${comment.postId}">${comment.sender}回复了你：${comment.content}</span>
+                                <span style="margin-right: auto;" id="${comment.postId}">${comment.sender}回复了你：${comment.content}</span>
                                 <button type="submit" style="width: 100px; height: 30px;">查看</button>
                             </form>
+
                         </td>
                     </tr>
                 </c:forEach>
