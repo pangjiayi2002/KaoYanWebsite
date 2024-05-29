@@ -13,6 +13,6 @@
 </form>
 <a href="postHomeServlet?school_id=1&user_id=2">click</a><br/>
 
-<a href="/ListServlet">用户管理</a>
+<a href="ListServlet">用户管理</a>
 </body>
 </html>

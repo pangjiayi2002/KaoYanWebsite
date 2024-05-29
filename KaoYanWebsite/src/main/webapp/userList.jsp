@@ -8,24 +8,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="renderer" content="webkit">
     <title></title>
-    <link rel="stylesheet" href="/css/pintuer.css">
-    <link rel="stylesheet" href="/css/admin.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/amazeui.min.css">
-    <link rel="stylesheet" href="/css/admin1.css">
-    <link rel="stylesheet" href="/css/app.css">
-    <script src="/js/jquery.js"></script>
-    <script src="/js/pintuer.js"></script>
-    <script src="/js/amazeui.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/plugs.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/pintuer.css">
+    <link type="text/css" rel="stylesheet" href="css/admin.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="css/amazeui.min.css">
+    <link type="text/css" rel="stylesheet" href="css/admin1.css">
+    <link type="text/css" rel="stylesheet" href="css/app.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/pintuer.js"></script>
+    <script type="text/javascript" src="js/amazeui.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/plugs.js"></script>
+    <script>
+        //删除单条数据
+        function deleteOne(sid) {
+            let isDelete = confirm("确认删除该条数据吗？");
+            if (isDelete) {
+                //发送删除请求
+                $.ajax({
+                    url: "DeleteServlet?id=" + sid, // 设置请求的URL地址
+                    method: "GET", // 设置请求的方法（GET、POST等）
+                    dataType: "json", // 设置返回结果的类型为JSON格式
+                    success: function (response) { // 成功时的处理逻辑
+                        console.log("请求成功！");
+                        alert("删除成功！")
+                        console.log(response);
+                    },
+                    error: function (xhr,status,error) { // 失败时的处理逻辑
+                        // console.error("请求失败！");
+                        // console.error("状态: " + status);
+                        // console.error("错误: " + error);
+                        // alert("删除失败！");
+                    }
+                });
+            }
+        }
+    </script>
+    <style>
+        .table th,.table td{
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
 
 
 <form method="post" action="">
     <div class="panel admin-panel" style="border: 1px solid #ddd;">
-        <div class="panel-head"><span class="icon-magic">用户列表</strong></div>
+        <div class="panel-head"><span class="icon-magic">用户列表</span></div>
         <div class="padding border-bottom">
             <style>
                 ul li {
@@ -33,8 +63,6 @@
                 }
             </style>
             <ul class="search" style="height: 40px">
-
-
                 <li>
                     <form action="/ListServlet" method="post">
                         <div class="am-u-sm-12 am-u-md-3" style="position: absolute;right:10px;
@@ -46,19 +74,19 @@
                                 <span class="am-input-group-btn">
 										<button type="submit" style="margin-left: 5px"
                                                 class="btn btn-primary">查询</button>
-                            </div>
+                                </span></div>
                         </div>
                     </form>
                 </li>
             </ul>
         </div>
         <table class="table table-hover text-center">
-            <tr>
-                <th>编号</th>
-                <th>姓名</th>
-                <th>头像</th>
-                <th>角色</th>
-                <th>操作</th>
+            <tr style="vertical-align: middle">
+                <th style="vertical-align: middle">编号</th>
+                <th style="vertical-align: middle">姓名</th>
+                <th style="vertical-align: middle">头像</th>
+                <th style="vertical-align: middle">角色</th>
+                <th style="vertical-align: middle">操作</th>
             </tr>
 
             <c:forEach items="${users}" var="user">
@@ -120,27 +148,4 @@
 </form>
 </body>
 </html>
-<script>
 
-
-    //删除单条数据
-    function deleteOne(sid) {
-        let isDelete = confirm("确认删除该条数据吗？");
-        if (isDelete) {
-            //发送删除请求
-            $.ajax({
-                url: "/DeleteServlet?id=" + sid, // 设置请求的URL地址
-                method: "GET", // 设置请求的方法（GET、POST等）
-                dataType: "json", // 设置返回结果的类型为JSON格式
-                success: function (response) { // 成功时的处理逻辑
-                    console.log("请求成功！");
-                    alert("删除成功！")
-                    console.log(response);
-                },
-                error: function () { // 失败时的处理逻辑
-                }
-            });
-        }
-    }
-</script>
-</html>

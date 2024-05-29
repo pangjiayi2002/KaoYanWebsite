@@ -9,7 +9,8 @@ import service.user.UserService;
 import service.user.UserServiceImpl;
 
 import java.io.IOException;
-@WebServlet(name = "DeleteServlet", value = "/DeleteServlet")
+//@WebServlet(name = "DeleteServlet", value = "/DeleteServlet")
+@WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
 
     private UserService userService =
@@ -26,7 +27,8 @@ public class DeleteServlet extends HttpServlet {
         int deleteOk = userService.deleteById(sid);
         if(deleteOk > 0){
             //跳转到后台首页
-            resp.sendRedirect("/userList.jsp");
+            System.out.println("delete ok");
+            resp.sendRedirect("userList.jsp");
         }
     }
 }
